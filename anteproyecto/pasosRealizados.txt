@@ -1,0 +1,57 @@
+1.- Instalar Raspian en sdCard
+1.1.- Descargar Imagen (https://www.raspberrypi.org/downloads/raspbian/)
+Se realiza la descarga de la imagen Raspian Jessie with pixel 
+Version:March 2017
+Release date:2017-03-02
+Kernel version:4.4
+
+1.2.- Instalación de Imagen en sdCard (sistema operativo usado macOS Sierra Versión 10.12.3)
+- Conectar la sdCard en el Mac
+- Formatear la sdCard en formato FAT32 - utilidad de Discos, formatear en formato FAT
+- (terminal) Comprobar el nombre de la sdCard en el sistema: diskutil list, en este caso es disk1
+- (terminal) Desmontar la sdCard: diskutil unmountDisk /dev/disk1
+- Copiar la imagen descargada en la sdCard: sudo dd bs=1m if=2017-03-02-raspbian-jessie.img of=/dev/rdisk1
+
+2.- Activación del servicio SSH en el Raspberry Pi
+- Comprobar si el servicio SSH está instalado en el sistema y actualizarlo, si no está instalado, instalarlo: sudo apt-get install ssh
+- Iniciar servicio SSH: sudo /etc/init.d/ssh start
+- Para ejecutarlo automáticamente al iniciar el Raspberry Pi: sudo update-rc.d ssh defaults
+
+3.- Conectar por ssh con la raspberry
+- En raspberry, para saber su dirección ip: hostname -I
+- Desde el Mac en la terminal: ssh pi@<IP> 
+o también: ssh pi@raspberrypi.local
+- Aceptar el mensaje de seguridad/autenticidad escribiendo "yes"
+- El password de usuario en Raspbian es: raspberry.
+
+4.- Instalar librerías necesarias:
+- sudo apt-get update
+- sudo apt-get upgrade
+- Reproductor de música: sudo apt-get install xmms2
+- Actualizador automático de la librería de música: sudo apt-get install xmms2-client-medialib-updater
+- Herramienta de códigos QR: sudo apt-get install zbar-tools
+- Generador de códigos QR: sudo apt-get install qrencode
+- Reproductor MP3, incluyendo librerías MP·: sudo apt-get install mpg123
+- Editor de etiquetas: sudo apt-get install id3v2 id3
+
+5.- Crear carpetas de sonidos en raspberry
+- mkdir /home/pi/Music/sonidos
+- mkdir /home/pi/Music/canciones
+
+añadir carpetas a xmms2 tutorial básico: https://www.youtube.com/watch?v=bK1hMUs0ODs
+xmms2 add Music/
+
+6.- Activar la cámara (https://www.raspberrypi.org/learning/getting-started-with-picamera/worksheet/):
+- En menú/Preferencias/Raspberry Pi Configuración/Interfaces - habilitar camara y reiniciar.
+
+
+*UTILIDADES
+------------
+- Enviar archivo de sonido desde el MAC a la raspberry: scp archivoSonido.mp3 pi@<ip>:/home/pi/Music/sonidos
+- Traer archivo desde raspberry al MAC: scp pi@raspberrypi.local:/home/pi/error.png /Users/Teo/Desktop
+- Listar todos los mp3 o ogg del sistema: find ~ -iname '*.mp3' -o -iname '*.ogg'
+- Reproducir una canción: mpg123 /home/pi/Music/sonidos/error.mp3
+- QRencode: qrencode -o error.png 'mpg123 /home/pi/Music/sonidos/error.mp3'
+- Si al cambiar de Hardware-Rasbperry el puerto 22 está cerrado: 
+	sudo systemctl enable ssh.service
+	sudo systemctl start ssh.service
