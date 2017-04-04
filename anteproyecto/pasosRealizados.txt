@@ -30,6 +30,7 @@ o también: ssh pi@raspberrypi.local
 - Reproductor de música: sudo apt-get install xmms2
 - Actualizador automático de la librería de música: sudo apt-get install xmms2-client-medialib-updater
 - Herramienta de códigos QR: sudo apt-get install zbar-tools
+	sudo apt-get install libzbarqt0
 - Generador de códigos QR: sudo apt-get install qrencode
 - Reproductor MP3, incluyendo librerías MP·: sudo apt-get install mpg123
 - Editor de etiquetas: sudo apt-get install id3v2 id3
@@ -55,3 +56,6 @@ xmms2 add Music/
 - Si al cambiar de Hardware-Rasbperry el puerto 22 está cerrado: 
 	sudo systemctl enable ssh.service
 	sudo systemctl start ssh.service
+
+-Codigos QR
+	https://ralgozino.wordpress.com/2011/06/13/how-to-create-and-decode-a-qr-code-in-python-using-qrtools/
