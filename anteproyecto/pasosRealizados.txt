@@ -24,7 +24,12 @@ o también: ssh pi@raspberrypi.local
 - Aceptar el mensaje de seguridad/autenticidad escribiendo "yes"
 - El password de usuario en Raspbian es: raspberry.
 
-4.- Instalar librerías necesarias:
+4.- Actualizar Firmware RaspberryPi:
+- sudo apt-get install rpi-update
+- sudo rpi-update
+- sudo reboot
+
+5.- Instalar librerías necesarias:
 - sudo apt-get update
 - sudo apt-get upgrade
 - Reproductor de música: sudo apt-get install xmms2
@@ -35,15 +40,15 @@ o también: ssh pi@raspberrypi.local
 - Reproductor MP3, incluyendo librerías MP·: sudo apt-get install mpg123
 - Editor de etiquetas: sudo apt-get install id3v2 id3
 
-5.- Crear carpetas de sonidos en raspberry
+6.- Crear carpetas de sonidos en raspberry
 - mkdir /home/pi/Music/sonidos
 - mkdir /home/pi/Music/canciones
 
 añadir carpetas a xmms2 tutorial básico: https://www.youtube.com/watch?v=bK1hMUs0ODs
 xmms2 add Music/
 
-6.- Activar la cámara (https://www.raspberrypi.org/learning/getting-started-with-picamera/worksheet/):
-- En menú/Preferencias/Raspberry Pi Configuración/Interfaces - habilitar camara y reiniciar.
+7.- Activar la cámara -habilitar cámara- y reiniciar.
+- sudo raspi-config
 
 
 *UTILIDADES
@@ -59,3 +64,15 @@ xmms2 add Music/
 
 -Codigos QR
 	https://ralgozino.wordpress.com/2011/06/13/how-to-create-and-decode-a-qr-code-in-python-using-qrtools/
+
+- Probar la cámara: raspistill -vf -hf -o /home/pi/Pictures/test.jpg
+- Activar la ruta /dev/video0: sudo modprobe bcm2835-v4l2
+
+zbarcam -Sdisable -Sqrcode.enable --prescale=320x240 /dev/video0 | /home/pi/rbar.sh
+
+MANEJAR EL MONITOR:
+	Switch on
+		“/opt/vc/bin/tvservice -p”
+
+	Switch off
+		“/opt/vc/bin/tvservice -o” 
